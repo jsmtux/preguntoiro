@@ -6,7 +6,7 @@ let question_data = [];
 const foo = Bun.file(Bun.argv[2]);
 const text = await foo.text();
 const lines = text.split(/\r?\n/);
-lines.slice(0, 3).forEach( (line) => {
+lines.slice(0, 15).forEach( (line) => {
   var question = {
     "title": line.split(",")[1],
     "answers": []

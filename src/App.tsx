@@ -6,7 +6,7 @@ import { QuestionPage } from "./QuestionPage";
 import { ResultsPage } from "./ResultsPage";
 import "./index.css";
 
-export function App() {
+export function App({}) {
   function handleClick() {
     setQuestionIndex(c => (c + 1));
   }
@@ -16,12 +16,21 @@ export function App() {
       handleClick();
     });
 
+    document.body.addEventListener('keydown', (event) => {
+      if (event.key == "ArrowLeft") {
+        setQuestionIndex(c => (c - 1));
+      }else if (event.key == "ArrowRight") {
+        setQuestionIndex(c => (c + 1));
+      }
+    });
+    
     axios.get("/preguntas.json").then((res) => {
       setQuestions(res.data);
     });
   }, []);
 
   const[questionIndex, setQuestionIndex] = useState(0)
+  const answerList = questionIndex - 15
   const[questions, setQuestions] = useState([])
 
   function MainContent({isFinishState}) {
@@ -34,7 +43,7 @@ export function App() {
         <QuestionPage question={questions[questionIndex]} index={questionIndex + 1}/>
       </>)
     } else {
-      return(<ResultsPage questions={questions}/>)
+      return(<ResultsPage questions={questions} questionIndex={answerList}/>)
     }
   }
 
