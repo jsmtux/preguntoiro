@@ -9,6 +9,7 @@ export function ResultsPage({ questions, questionIndex }) {
         <td class="px-4 py-2 border border-gray-800"><QuestionResult question={question} shown={questionIndex > index} /></td>
       </tr>
   );
+  
   function QuestionResult({question, shown}) {
       const orderedAnswers = question.answers.toSorted((a1, a2) => a1.localeCompare(a2))
       const answerIndex = orderedAnswers.findIndex((answer) => answer == question.answers[0])
@@ -25,10 +26,10 @@ export function ResultsPage({ questions, questionIndex }) {
       const numQuestion = Math.min(questionIndex-1, 14)
       return(
         <>
-        <div>
-          {questions[numQuestion].title}
+        <div class="text-3xl my-10">
+          {numQuestion+1}. {questions[numQuestion].title}
         </div>
-        <div>
+        <div class="text-3xl">
           {questions[numQuestion].answers[0]}
         </div>
         </>)

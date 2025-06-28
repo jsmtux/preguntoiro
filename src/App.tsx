@@ -11,6 +11,8 @@ export function App({}) {
     setQuestionIndex(c => (c + 1));
   }
 
+  const numQuestions = 15
+
   useEffect(() => {
     document.body.addEventListener('click', () => {
       handleClick();
@@ -18,7 +20,7 @@ export function App({}) {
 
     document.body.addEventListener('keydown', (event) => {
       if (event.key == "ArrowLeft") {
-        setQuestionIndex(c => (c - 1));
+        setQuestionIndex(c => Math.max(0, c - 1));
       }else if (event.key == "ArrowRight") {
         setQuestionIndex(c => (c + 1));
       }
@@ -30,7 +32,7 @@ export function App({}) {
   }, []);
 
   const[questionIndex, setQuestionIndex] = useState(0)
-  const answerList = questionIndex - 15
+  const answerList = questionIndex - numQuestions
   const[questions, setQuestions] = useState([])
 
   function MainContent({isFinishState}) {
